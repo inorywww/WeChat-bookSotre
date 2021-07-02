@@ -1,0 +1,15 @@
+<!--miniprogram/pages/login/login.wxml-->
+<!-- <view class="top-bg" style="background-image: url('/images/login_bg.png')"></view> -->
+<view class="contain">
+      <view class="card">
+            <view class="title">登录</view>
+            <view class="contact">
+                  <input bindinput="accountInput"  value="{{account}}" maxlength="20" placeholder-class="pache" placeholder="输入账户名" />
+            </view>
+             <view class="contact">
+                  <input type="password" bindinput="passwordInput" value="{{password}}" maxlength="20" placeholder-class="pache" placeholder="请输入密码" />
+            </view>
+      </view>
+      <!--登录确认-->
+      <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">登录</button>
+</view> 

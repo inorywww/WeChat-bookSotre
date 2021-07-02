@@ -1,0 +1,61 @@
+<!--miniprogram/pages/cart/cart.wxml-->
+<view class="myPage" bindtap="closeBuy" wx:if="{{showBuy}}"> </view>
+
+<view class="empty" hidden="{{iscart}}">
+	<view class="empty-cart">
+		<text>购物车空空如也~</text>
+	</view>
+</view>
+
+<!--列表显示-->
+<view hidden="{{!iscart}}">
+	<block wx:for="{{cart}}" wx:key="_id">
+		<view class="list_box">
+			<view class="list_content" bindtap="detail" data-id="{{item.id}}">
+				<view class="list_word">
+					<view class="list_title text-cut">{{item.name}}
+					</view>
+					<view class="list_author text-cut">{{item.author}}
+					</view>
+				</view>
+				<view class="list_price">￥{{item.price}}元</view>
+			</view>
+			<view class="stepper">  
+      <!-- 减号 -->  
+      <text class="sign {{num <= 1 ? 'disabled' : 'normal'}}" bindtap="delCount" data-index="{{index}}">-</text>  
+      <!-- 数值 -->  
+      <input class="number" type="number" bindchange="bindManual" value="{{item.buy_num}}"  disabled="disabled"/>  
+      <!-- 加号 -->  
+      <text class="sign {{num >= 10 ? 'disabled' : 'normal'}}" bindtap="addCount" data-index="{{index}}">+</text>  
+  </view>  
+			<view>
+				<icon wx:if="{{item.selected}}" type="success" color="#6699CC" data-index="{{index}}" class="cart-pro-select"
+					bindtap="selectList" />
+				<icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
+			</view>
+			<view class="list-other">
+				<image bindtap="deleteList" data-index="{{index}}" src="../../images/del.png"></image>
+			</view>
+		</view>
+	</block>
+
+</view>
+
+<view class="bottom" hidden="{{!iscart}}">
+	<view class="allPrice">￥ {{totalPrice}} 元</view>
+	<view class="buy_box">
+		<view class="buy shadow" bindtap="paypost">下单</view>
+	</view>
+	<text style="font-size:30rpx">全选</text>
+	<icon wx:if="{{selectAllStatus}}" type="success" color="#6699CC" bindtap="selectAll" />
+	<icon wx:else type="circle" bindtap="selectAll" />
+</view>
+
+
+<!-- 购买确认弹窗 -->
+<view wx:if="{{showBuy}}" class="showBuy">
+
+	<view class="showBuy-button">
+		<view class="buy shadow" bindtap="getStatus">确认下单</view>
+	</view>
+</view>

@@ -1,0 +1,43 @@
+<wxs src="../../../time.wxs" module="otherjs" />
+<view class="tab_contain">
+      <block wx:for="{{tab}}" wx:key="id">
+            <view class="tab_one" bindtap="changeTab" data-id="{{index}}">
+                  <view class="{{tabid==item.id?'tab_on':''}}">{{item.name}}</view>
+            </view>
+      </block>
+</view>
+
+<view class="contain" wx:if="{{list.length!==0}}">
+      <block wx:for="{{list}}" wx:key="orderID">
+            <view class="card shadow" bindtap="godetail" data-id="{{item.orderID}}">
+                  <view class="top">
+                        <view class="top1">
+                              <view class="title">
+                                    <image src="/images/order.png"></image>
+                                    <view>订单ID：{{item.orderID}}</view>
+                              </view>
+                        </view>
+                  </view>
+                  <view class="center">
+                        <view class="content">
+                              <view class="book">
+                                    <view class="book_name text-cut">订单状态：{{item.status}}</view>
+                                    <view class="book_name text-cut">书籍ID：{{item.booksID}}</view>
+                                    <view class="book_name text-cut">购买数量：{{item.booksNum}}</view>
+                              </view>
+                              <view class="price">￥{{item.totalPrice}}元</view>
+                        </view>
+                  </view>
+                  <view class="bottom">
+                        <view class="confirm"  bindtap="godetail" data-id="{{item.orderID}}" catchtap="confirm" data-ord="{{item}}">查看订单</view>
+                        <view class="cancel" catchtap="deleteOrder" data-id="{{item.orderID}}">删除订单</view>
+                  </view>
+            </view>
+      </block>
+</view>
+
+<!--无内容显示-->
+<view class="nocontent" wx:if="{{list.length==0}}">
+      <image src="/images/blank.png"></image>
+      <view class="blank_text">您还没有下单记录~</view>
+</view>

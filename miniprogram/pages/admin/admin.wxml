@@ -1,0 +1,124 @@
+<!--miniprogram/pages/admin/admin.wxml-->
+<!-- 管理员登录界面 -->
+<view wx:if="{{admin}}">
+	<image style="width:100%" src="../../images/background.jpg"></image>
+	<view class="b_place">
+		<view class="b_placebox">
+			<input placeholder="管理员账号" bindinput="adminNameInput"></input>
+		</view>
+		<view class="b_placebox">
+			<input type="password" placeholder="管理员密码" bindinput="adminPassInput"></input>
+		</view>
+		<view class="showBuy-button">
+			<view class="buy shadow" bindtap="adminLogin">登录</view>
+		</view>
+	</view>
+</view>
+
+<!-- 管理员界面 -->
+<view wx:if="{{adminMenu}}">
+	<view class="tab_contain">
+		<block wx:for="{{tab}}" wx:key="id">
+			<view class="tab_one" bindtap="changeTab" data-id="{{index}}">
+				<view class="{{tabid==item.id?'tab_on':''}}">{{item.name}}</view>
+			</view>
+		</block>
+	</view>
+
+	<!-- 用户管理 -->
+	<view wx:if="{{userMenu}}">
+		<view class="userSum">用户总人数：{{userList.length}}</view>
+		<view class="userContain" wx:if="{{userList.length!==0}}">
+			<block wx:for="{{userList}}" wx:for-index='index' wx:for-item='item'>
+				<view class="card shadow">
+					<view class="center">
+						<image src="{{item.info.avatarUrl}}"></image>
+						<view class="content">
+							<view class="book">
+								<view class=" text-cut">{{item.account}}</view>
+								<view class=" text-cut">{{item.accName}}</view>
+								<view class=" text-cut">{{item.tel}}</view>
+								<view class=" text-cut">{{item.address}}</view>
+							</view>
+						</view>
+					</view>
+					<view class="bottom">
+						<view class="cancel" bindtap="deleteUser" data-account="{{item.account}}">删除用户</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+
+	<!-- 在售书籍管理 -->
+	<view wx:if="{{bookMenu}}">
+		<view class="userSum">在售书籍总数：{{bookList.length}}</view>
+		<view class="contain" wx:if="{{bookList.length!==0}}">
+			<block wx:for="{{bookList}}" wx:key="id">
+				<view class="card shadow" data-id="{{item.id}}">
+					<view class="top">
+						<view class="top1">
+							<view class="title">
+								<image src="/images/order.png"></image>
+							</view>
+						</view>
+					</view>
+					<view class="center">
+						<image src="/{{item.url}}"></image>
+						<view class="content">
+							<view class="book">
+								<view class="book_name text-cut">书籍id：{{item.id}}</view>
+								<view class="book_name text-cut">《{{item.name}}》</view>
+								<view class="book_name text-cut">{{item.author}}</view>
+								<view class="book_category text-cut">{{item.category}}</view>
+							</view>
+						<block>
+							<view class="price">￥{{item.price}}元</view>
+						</block>
+						</view>
+					</view>
+					<view class="bottom">
+						<view class="cancel" catchtap="deleteBook" data-id="{{item.id}}">删除书籍</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+
+	<!-- 订单管理 -->
+	<view wx:if="{{orderMenu}}">
+		<view class="userSum">订单总数：{{orderList.length}}</view>
+		<view class="userContain" wx:if="{{bookList.length!==0}}">
+			<block wx:for="{{orderList}}" wx:key="id">
+				<view class="card shadow" data-id="{{item.orderID}}">
+					<view class="top">
+						<view class="top1">
+							<view class="title">
+								<image src="/images/order.png"></image>
+								<view>所属用户：{{item.account}}</view>
+							</view>
+						</view>
+					</view>
+					<view class="center">
+						<view class="content">
+							<view class="book">
+								<view class="book_name text-cut">订单ID：{{item.orderID}}</view>
+								<view class="book_name text-cut">订单状态：{{item.status}}</view>
+								<view class="book_name text-cut">书籍ID：{{item.booksID}}</view>
+								<view class="book_name text-cut">购买数量：{{item.booksNum}}</view>
+							</view>
+						</view>
+					</view>
+					<view class="bottom">
+						<view class="cancel" catchtap="deleteOrder" data-id="{{item.orderID}}">删除订单</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+
+
+</view>
+
+<!-- 回到顶部 -->
+<image src="../../images/goTop.png" class="goTop" bindtap="goTop"></image>

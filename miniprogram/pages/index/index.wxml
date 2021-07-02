@@ -1,0 +1,59 @@
+<wxs src="../../time.wxs" module="otherjs" />
+<view class="top_box">
+      <view class="search_box" bindtap="search">
+            <image class="search_ico" src="/images/search.png"></image>
+            <view class="search_text">搜索</view>
+      </view>
+</view>
+
+<!--分类导航-->
+<view class="{{scrollTop>310?'nofixed':''}}">
+</view>
+<view class="kind_contain {{scrollTop>310?'fixed':''}}">
+      <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}rpx">
+            <view class="nav-item {{-2==categoryCur?'tab-on':''}}" bindtap="selectAll">
+            <view class="nav-text">全部</view>
+      </view>
+            <view class="nav-item" wx:for="{{category}}" wx:key="id" bindtap="categorySelect" data-id="{{index}}">
+                  <view class="nav-text {{index==categoryCur+1?'tab-on':''}}">{{item.name}}</view>
+            </view>
+      </scroll-view>
+      <view class="kind_img" bindtap="showlist">
+            <image lazy-load src="{{showList?'/images/l_down.png':'/images/l_right.png'}}" />
+      </view>
+      <view class="kindlist_box" wx:if="{{showList}}">
+            <view class="kindlist_card">
+                  <view class="list_grid">
+                        <block wx:for="{{category}}" wx:key="id">
+                              <view class="list_one" bindtap="categorySelect" data-id="{{index}}" data-class="{{item.id}}">
+                                    <view class="{{index==categoryCur+1?'list-on':''}}">{{item.name}}</view>
+                              </view>
+                        </block>
+                  </view>
+            </view>
+      </view>
+</view>
+<!--宫格显示-->
+<view hidden="{{}}">
+      <view class="card_grid" wx:if="{{list.length>0}}">
+            <block wx:for="{{list}}" wx:key="_id">
+                  <view class="card_one" bindtap="detail" data-id="{{item.id}}">
+                        <image lazy-load class="card_poster" src="/{{item.url}}"></image>
+                        <view class="card_title text-cut">{{item.name}}
+                        </view>
+                        <view class="card_author text-cut">{{item.author}}
+                        </view>
+                        <view class="card_between">
+                              <view class="card_price">￥{{item.price}}元</view>
+                        </view>
+                  </view>
+            </block>
+      </view>
+</view>
+<!--无内容显示-->
+<view class="nocontent" wx:if="{{list.length==0}}">
+      <image lazy-load src="/images/blank.png"></image>
+      <view class="blank_text">还没有书籍发布~</view>
+</view>
+<!-- 回到顶部 -->
+<image src="../../images/goTop.png" class="goTop" bindtap="goTop"></image>

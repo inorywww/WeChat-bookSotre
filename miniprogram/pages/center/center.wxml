@@ -1,0 +1,16 @@
+<wxs src="../../time.wxs" module="otherjs" />
+<view class="contain">
+      <view class="top_box">
+
+	<view class="top_1">
+		<view  class="top_1_1">用户名:{{info.account}}</view>
+		<view  class="top_1_1">收货人姓名:{{info.accName}}</view>
+		<view  class="top_1_1">电话:{{info.tel}}</view>
+		<view class="top_1_1">收获地址:{{info.address}}</view>
+	</view>
+</view>
+</view>
+
+<van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
+      <image src="../../images/goTop.png" class="goTop" bindtap="gotop"></image>
+</van-transition>

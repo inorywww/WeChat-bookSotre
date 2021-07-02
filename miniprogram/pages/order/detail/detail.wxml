@@ -1,0 +1,48 @@
+<view class="myPage" bindtap="closeDelivery" wx:if="{{checkDelivery}}"> </view>
+<view class="contain">
+	<view class="card">
+		<!-- <image class="top_over" src="/images/over.png"></image>
+            <image class="bot_over" src="/images/over.png"></image> -->
+		<view class="goods_box">
+			<image class="goods_img" src="{{detail.bookinfo.pic}}"></image>
+			<view class="goods_content">
+				<view class="goods_title text-cut">订单ID：{{infos.order.orderID}}</view>
+				<view class="goods_author text-cut">当前状态:{{infos.order.status}}</view>
+			</view>
+		</view>
+		<view class="border"></view>
+		<view class="orderfare">订单信息</view>
+		<view class="fare_box">
+			<view class="fare_title">书籍ID</view>
+			<view class="fare_des">{{infos.order.booksID}}</view>
+		</view>
+		<view class="fare_box">
+			<view class="fare_title">购买数量</view>
+			<view class="fare_des">{{infos.order.buy_num}}</view>
+		</view>
+		<view class="fare_box">
+			<view class="fare_title">总价</view>
+			<view class="fare_des">￥{{infos.order.totalPrice}}</view>
+		</view>
+		<view class="border"></view>
+		<view class="orderfare">书籍信息</view>
+		<view class="fare_box">
+			<view class="fare_title">ID</view>
+			<view class="fare_title">书名</view>
+			<view class="fare_title">数量</view>
+			<view class="fare_title">单价</view>
+			<view class="fare_title">总价</view>
+		</view>
+		<view class="fare_box" wx:for="{{infos.books}}">
+			<view class="fare_title">{{item.id}}</view>
+			<view class="fare_title">{{item.name}}</view>
+			<view class="fare_title">{{item.buy_num}}</view>
+			<view class="fare_title">{{item.price}}</view>
+			<view class="fare_title">{{item.buy_num*item.price}}</view>
+		</view>
+		<view class="border"></view>
+		<view class="bot_box">
+			<view class="delete" bindtap="delete">删除订单</view>
+		</view>
+	</view>
+</view>

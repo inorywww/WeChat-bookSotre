@@ -1,0 +1,46 @@
+<view class="top_box">
+	<view class="top_2">
+		<view class="avator">
+			<open-data  type="userAvatarUrl"></open-data>
+			<image wx:if="{{!userInfo}}" src="/images/avator.png" bindtap="go" data-go="/pages/login/login"></image>
+		</view>
+	</view>
+	<view class="top_1">
+		<view wx:if="{{!userInfo}}" class="top_1_1" bindtap="go" data-go="/pages/login/login">点击登录</view>
+		<view class="top_1_2" wx:if="{{userInfo}}"  >{{userInfo.account}}，欢迎您！</view>
+		<view wx:if="{{userInfo}}" class="top_1_1">
+			<open-data type="userNickName"></open-data>
+		</view>
+	</view>
+</view>
+
+<view class="center_box">
+	<view class="center_1" bindtap="goRegister" data-status="1">
+		<image src="/images/publish1.png"></image>
+		<view>注册账号</view>
+	</view>
+	<view class="center_1" bindtap="go" data-go="/pages/order/myOrder/myOrder" data-status="1">
+		<image src="/images/order1.png"></image>
+		<view>我的订单</view>
+	</view>
+	<view class="center_1" bindtap="go" data-go="/pages/center/center" data-status="1">
+		<image src="/images/parse1.png"></image>
+		<view>个人中心</view>
+	</view>
+</view>
+
+<view class="blank"></view>
+<view class="center_box">
+<view class="center_1" bindtap="outLogin">
+		<image src="/images/out.png"></image>
+		<view>退出登录</view>
+	</view>
+	<view class="center_1" bindtap="adminLogin">
+		<image src="/images/adminLogin.png"></image>
+		<view>管理员登录</view>
+	</view>
+	<view class="center_1" >
+		<image src="/images/other.png"></image>
+		<view>其他</view>
+	</view>
+</view>
